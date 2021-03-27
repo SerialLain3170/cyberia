@@ -1,0 +1,12 @@
+*.cache-lentoppo
+*.json
+*.mp3
+*.wav
+*.png
+*.jpg
+*.log
+*.db
+*.sql
+*.pyc
+
+.DS_Store

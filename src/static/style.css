@@ -1,0 +1,42 @@
+body {
+    background-color: #131313;
+    color: #FFFFFF;
+    text-align: center;
+    vertical-align: middle;
+    margin-right: auto;
+    margin-left : auto;
+    margin: 0 auto; 
+}
+
+.summary {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -webkit-transform : translate(-50%,-50%);
+    transform : translate(-50%,-50%);
+}
+
+input {
+    text-align: center;
+    vertical-align: middle;
+    margin-right: auto;
+    margin-left : auto;
+    margin: 0 auto; 
+}
+
+div.nes_field.input_wrap {
+    text-align: center;
+    vertical-align: middle;
+    margin-right: auto;
+    margin-left : auto;
+    left: 50%;
+    margin: 0 auto; 
+}
+
+p.blank {
+    margin-bottom: 8em;
+}
+
+p.blankafter {
+    margin-bottom: 4em;
+}
