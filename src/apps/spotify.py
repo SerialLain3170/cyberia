@@ -5,6 +5,7 @@ import json
 import pprint
 import requests
 import time
+import random
 import numpy as np
 
 from spotipy.oauth2 import SpotifyClientCredentials
@@ -13,6 +14,7 @@ from pathlib import Path
 from typing import List, Dict, Union, Optional
 from apps.db import DB
 from apps.utils import norm, cosine_sim
+from apps.code import num_check
 
 
 class SpotifyManager:
@@ -203,15 +205,13 @@ class SpotifyManager:
                 if suminfos["next"] is None:
                     break
 
-    def makePlaylist(self, sorted_dict, target_song: str):
+    def makePlaylist(self, sorted_dict, playlist_name: str):
         def createTrackidList(sorted_dict):
             idlist = []
             for k, v in sorted_dict:
                 idlist.append(v[3])
             return idlist
         user_id = self.sp.current_user()['id']
-        target_song = target_song.replace(" ", "")
-        playlist_name = f"{target_song}RelatedSongs"
 
         results = self.sp.user_playlist_create(user_id,
                                                playlist_name,
@@ -223,16 +223,21 @@ class SpotifyManager:
         
         return results["external_urls"]["spotify"]
 
+    def randomChoose(self, num: int) -> (Optional[str], Optional[str]):
+        judge, c = num_check(num)
+
+        if judge is None:
+            return None, c
+
+        random_dict = random.sample(list(self.src_dict.items()), num)
+        pprint.pprint(random_dict)
+        playlist_name = "RandomlyChosenSongs"
+
+        playlist_url = self.makePlaylist(random_dict, playlist_name)
+
+        return playlist_url, None
+        
     def searchNearest(self, track_id: str, num: int) -> (Optional[str], Optional[str]):
-        def num_check(num: int) -> (Optional[str], Optional[str]):
-            if not isinstance(num, int):
-                return None, "00003"
-
-            if num > 10000:
-                return None, "00004"
-
-            return "OK", None
-
         judge, c = num_check(num)
 
         if judge is None:
@@ -265,18 +270,8 @@ class SpotifyManager:
 
         pprint.pprint(results)
 
-        playlist_url = self.makePlaylist(results, target_dict["songname"])
+        songname = target_dict["songname"]
+        playlist_name = f"{songname}RelatedSongs"
+        playlist_url = self.makePlaylist(results, playlist_name)
 
         return playlist_url, c
-
-
-if __name__ == "__main__":
-    sp = SpotifyManager()
-    #sp.searchNearest("1Z85TIFuhlEJoMUhyquObl", num=50)
-    #with open("./albums.json") as f:
-    #    infos = json.load(f)
-    #sp.extractSongsByArtists(infos["artists"])
-    #sp.extractSongsByAlbums(infos["albums"])
-    #parse_favorite_tracks(sp)
-    #getTrackFeatures(sp, "5Vc4lIVZBZhx62YpNVTJp4")
-    #getAlbum(sp, "4MmJccOvKpVGvoYvf73uQp")
