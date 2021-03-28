@@ -29,7 +29,7 @@ class SpotifyManager:
         client_id = os.environ.get("SPOTIFY_CLIENT_ID")
         client_secret = os.environ.get("SPOTIFY_CLIENT_SECRET")
         username = os.environ.get("SPOTIFY_USERNAME")
-        redirect_url = "http://example.com/callback/"
+        redirect_url = os.environ.get("SPOTIFY_REDIRECT_URL")
         scope = "user-library-read user-read-playback-state playlist-read-private user-read-recently-played playlist-read-collaborative playlist-modify-public playlist-modify-private"
 
         manager = util.prompt_for_user_token(username, scope, client_id, client_secret, redirect_url)
