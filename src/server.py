@@ -1,5 +1,5 @@
 from apps.spotify import SpotifyManager
-from apps.code import error_code
+from apps.code import codes
 
 from fastapi import FastAPI, Request, Form
 from fastapi.templating import Jinja2Templates
@@ -12,6 +12,7 @@ app = FastAPI()
 app.mount("/static", StaticFiles(directory="static"), name="static")
 manager = SpotifyManager()
 templates = Jinja2Templates("templates")
+error_code = codes()
 
 
 @app.get('/')
@@ -21,7 +22,13 @@ def index(request: Request):
 
 @app.post('/search')
 async def search(request: Request, trackid: str = Form(...), num: int = Form(...)):
-    playlist_url, c = manager.searchNearest(trackid, num)
+    print(trackid)
+
+    if trackid == "random":
+        playlist_url, c = manager.randomChoose(num)
+    else:
+        playlist_url, c = manager.searchNearest(trackid, num)
+
     print(playlist_url, c)
 
     if playlist_url is None:
