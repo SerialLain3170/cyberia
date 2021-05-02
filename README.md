@@ -1,12 +1,12 @@
-# Rikka
+# Cyberia
 
 ![](./images/screen.png)
 
 ## Overview
-Rikka enables users to create two types of playlists that contain only game BGMs in Spotify.
+Cyberia helps users look for new game BGMs in Spotify. Specifically, the application creates two types of playlists that contain only game BGMs.
 
-- Playlists containing BGMs that have close features to user-chosen BGM.
-- Playlists containing randomly chosen BGMs.
+- A Playlist containing BGMs that have close features to user-chosen BGM.
+- A Playlist containing randomly chosen BGMs.
 
 ## Getting Started
 ### 0. Preparation
@@ -25,12 +25,10 @@ $ export SPOTIFY_REDIRECT_URL="{Redirect URL}"
 - Build docker images via
 
 ```
-$ docker build -t fastapi -f Dockerfiles/FastAPI/Dockerfile .
-$ docker build -t nginx -f Dockerfiles/Nginx/Dockerfile .
-$ docker build -t mysql -f Dockerfiles/MySQL/Dockerfile .
+$ bash build.sh
 ```
 
-### 2. Start Rikka
+### 2. Start Cyberia
 - Start application via the command below and access `0.0.0.0:5001`.
 
 ```
@@ -39,14 +37,16 @@ $ docker-compose up -d
 
 ## User Guide
 ### 0. Fill in textboxes
-To create playlists, you need to fill in two textboxes (One is not always needed because default number is already set) in advance.
+You need to fill in two textboxes (One is not always needed because default number is already set) in advance.
 
-- First textbox: you need to enter ID of each track or "random". ID is included in Spotify's URL of each track.
-- Second textbox: the number represents the number of BGMs in playlist. default number is 50. Although you can change the number, you cannot set the number greater than 10000.
+- First textbox: ID of each track or "random"
+  - ID is included in Spotify's URL of each track.
+- Second textbox: Number of BGMs in playlist.
+  - default number is 44. You cannot set the number greater than 10000.
 
 ### 1. Push the button
 After filling in textboxes, you need to `Create!` button.
 
 ### 2. Results
-- If you enter ID of your chosen song, Rikka redirects to the page of playlist named `{Name of your chosen song}RelatedSongs`.
-- If you enter "random", Rikka redirects to the page of playlist named `RandomlyChosenSongs`.
+- If you enter ID of your chosen song, Cyberia redirects to the page of playlist named `{Name of your chosen song}RelatedSongs`.
+- If you enter "random", Cyberia redirects to the page of playlist named `RandomlyChosenSongs`.

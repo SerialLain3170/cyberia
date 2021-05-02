@@ -3,20 +3,17 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-
-<!-- Bootstrap CSS -->
 <link href="https://fonts.googleapis.com/css?family=Press+Start+2P" rel="stylesheet">
 <link href="https://unpkg.com/nes.css@latest/css/nes.min.css" rel="stylesheet" />
 <link href="/static/style.css" rel="stylesheet" />
-<title>Rikka</title>
-
+<title>{{ title }}</title>
 </head>
 
 <body>
     <div class="summary">
-        <span class="nes-text" style="font-size:80px;">Rikka</span>
+        <span class="nes-text" style="font-size:80px;">{{ title }}</span>
         {% if code %}
-            <p class="error" style="color: yellow;font-size: small;">{{code}}</p>
+            <p class="error" style="color: yellow;font-size: small;">{{ code }}</p>
         {% endif %}
         <p class="blank"></p>
         <div class="nes-field" id="inputs" style="text-align:center;">
@@ -27,7 +24,7 @@
                 </div>
                 <label for="name_field">If needed, enter the number of songs</label>
                 <div class="input_wrap">
-                    <input type="number" id="num" name="num" required minlength="1" style="width:600px;height:40px;" wrap="soft" class="nes-input" value="50">
+                    <input type="number" id="num" name="num" required minlength="1" style="width:600px;height:40px;" wrap="soft" class="nes-input" value="44">
                 </div>
                 <p class="blankafter"></p>
                 <button type="submit" class="nes-btn is-primary">Create!</button>
